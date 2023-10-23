@@ -28,7 +28,7 @@ jobs:
       - name: Run isort
         run: isort api/
   deploy-to-vercel:
-    needs: python-formatting, import-formatting
+    needs: [python-formatting, import-formatting]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
