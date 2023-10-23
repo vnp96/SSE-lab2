@@ -20,4 +20,3 @@ def submit():
     return render_template("age_calculator_result.html",
                            target_year=target_year,
                            target_age=target_age)
-
