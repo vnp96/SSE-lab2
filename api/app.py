@@ -21,14 +21,16 @@ def submit():
                            target_year=target_year,
                            target_age=target_age)
 
+
 @app.route("/query", methods=["GET"])
 def get_query():
     return process_query(request.args.get("q"))
 
+
 def process_query(query_param):
-    if("dinosaurs" in query_param):
+    if "dinosaurs" in query_param:
         return "Dinosaurs ruled the Earth 200 million years ago"
-    elif("asteroids" in query_param):
+    elif "asteroids" in query_param:
         return "Unknown"
     else:
         return "Edge case time"
