@@ -27,8 +27,22 @@ jobs:
         run: pip install isort
       - name: Run isort
         run: isort api/
+  unit-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.9
+      - name: Install pytest
+        run: pip install pytest
+      - name: Run pytest
+        run: pytest api/*.py
+ 
   deploy-to-vercel:
-    needs: [python-formatting, import-formatting]
+    needs: [python-formatting, import-formatting, unit-tests]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
