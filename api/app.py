@@ -34,4 +34,4 @@ def process_query(query_param):
     elif "asteroids" in query_param:
         return "Unknown"
     else:
-        return "Edge case time"
+        return "You cheeky bugger, you gotta try everything don't you?"
