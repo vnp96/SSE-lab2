@@ -24,7 +24,8 @@ def submit():
 
 @app.route("/query", methods=["GET"])
 def get_query():
-    return process_query(request.args.get("q"))
+    return render_template("url_hacking.html",
+                           ans_string=process_query(request.args.get("q")))
 
 
 def process_query(query_param):
