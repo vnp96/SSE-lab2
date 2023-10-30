@@ -13,12 +13,12 @@ def test_your_name():
 
 def test_largest_number():
     assert process_query("Which of the following numbers \
-            is the largest: 21, 29, 84?") == 84
+            is the largest: 21, 29, 84?") == "84"
 
 
 def test_plus():
     assert process_query("What is 41 plus 99?") == \
-            140
+            "140"
 
 
 def test_does_not_know_about_asteroids():
