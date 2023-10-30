@@ -27,8 +27,17 @@ def get_query():
     return process_query(request.args.get("q"))
 
 
+def get_numbers(input_String):
+    numbers = input_String.split(':')[1].split(',')
+    for i in range(len(numbers)):
+        numbers[i] = int(numbers[i].strip())
+    return numbers
+
+
 def process_query(query_param):
-    if "dinosaurs" in query_param:
+    if "Which of the following numbers is the largest" in query_param:
+        return max(get_numbers(query_param[:-1]))
+    elif "dinosaurs" in query_param:
         return "Dinosaurs ruled the Earth 200 million years ago"
     elif "asteroids" in query_param:
         return "Unknown"

@@ -9,6 +9,8 @@ def test_your_name():
     assert process_query("What is your name") ==\
             "Vishnu"
 
+def test_largest_number():
+    assert process_query("Which of the following numbers is the largest: 21, 29, 84 ?") == 84
 
 def test_does_not_know_about_asteroids():
     assert process_query("asteroids") == "Unknown"
