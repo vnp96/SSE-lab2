@@ -28,5 +28,10 @@ def test_square_cube():
             169?") == "64"
 
 
+def test_mul():
+    assert process_query("What is 70 multiplied by 52?") \
+            == "3640"
+
+
 def test_does_not_know_about_asteroids():
     assert process_query("asteroids") == "Unknown"

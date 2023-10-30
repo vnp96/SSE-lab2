@@ -52,12 +52,24 @@ def getSquareCubes(lst):
             return x
 
 
+def get_mul_query_ans(query_param):
+    args = query_param.strip('?').split()
+    prod = 1
+    for arg in args:
+        if arg.isnumeric():
+            prod *= int(arg)
+
+    return prod
+
+
 def process_query(query_param):
     query_param = query_param.lower()
     if "largest" in query_param and "numbers" in query_param:
         return str(max(get_numbers(query_param)))
     elif "plus" in query_param:
         return str(get_plus_query_ans(query_param))
+    elif "multiplied" in query_param:
+        return str(get_mul_query_ans(query_param))
     elif "square" in query_param and "cube" in query_param:
         return str(getSquareCubes(get_numbers(query_param)))
     elif "dinosaurs" in query_param:
