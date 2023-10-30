@@ -22,8 +22,8 @@ def submit():
                            target_age=target_age)
 
 
-#@app.route("/query", methods=["GET"])
-#def get_query():
+# @app.route("/query", methods=["GET"])
+# def get_query():
 #    return render_template("url_hacking.html",
 #                           ans_string=process_query(request.args.get("q")))
 
