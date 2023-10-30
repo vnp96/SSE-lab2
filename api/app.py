@@ -22,12 +22,12 @@ def submit():
                            target_age=target_age)
 
 
+#@app.route("/query", methods=["GET"])
+#def get_query():
+#    return render_template("url_hacking.html",
+#                           ans_string=process_query(request.args.get("q")))
+
 @app.route("/query", methods=["GET"])
-def get_query():
-    return render_template("url_hacking.html",
-                           ans_string=process_query(request.args.get("q")))
-
-
 def process_query(query_param):
     if "dinosaurs" in query_param:
         return "Dinosaurs ruled the Earth 200 million years ago"
