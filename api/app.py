@@ -34,14 +34,27 @@ def get_numbers(input_String):
     return numbers
 
 
+def get_plus_query_ans(query_param):
+    args = query_param.strip('?').split()
+    nums = []
+    for arg in args:
+        if arg.isnumeric():
+            nums.append(int(arg))
+
+    return sum(nums)
+
+
 def process_query(query_param):
+    query_param = query_param.lower()
     if "largest" in query_param and "numbers" in query_param:
         return max(get_numbers(query_param))
+    elif "plus" in query_param:
+        return get_plus_query_ans(query_param)
     elif "dinosaurs" in query_param:
         return "Dinosaurs ruled the Earth 200 million years ago"
     elif "asteroids" in query_param:
         return "Unknown"
-    elif "What is your name" in query_param:
+    elif "what is your name" in query_param:
         return "Vishnu"
     else:
         return "You cheeky bugger, you gotta try everything don't you?"
