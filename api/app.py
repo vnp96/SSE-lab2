@@ -44,12 +44,22 @@ def get_plus_query_ans(query_param):
     return sum(nums)
 
 
+def getSquareCubes(lst):
+    for x in lst:
+        cube = int(round(x ** (1. / 3))) ** 3 == x
+        square = int(round(x ** (1. / 2))) ** 2 == x
+        if cube and square:
+            return x
+
+
 def process_query(query_param):
     query_param = query_param.lower()
     if "largest" in query_param and "numbers" in query_param:
         return str(max(get_numbers(query_param)))
     elif "plus" in query_param:
         return str(get_plus_query_ans(query_param))
+    elif "square" in query_param and "cube" in query_param:
+        return str(getSquareCubes(get_numbers(query_param)))
     elif "dinosaurs" in query_param:
         return "Dinosaurs ruled the Earth 200 million years ago"
     elif "asteroids" in query_param:

@@ -21,5 +21,12 @@ def test_plus():
             "140"
 
 
+def test_square_cube():
+    assert process_query("Which of the following \
+            numbers is both a square and a cube: \
+            1085, 1796, 343, 3359, 64, 3655,\
+            169?") == "64"
+
+
 def test_does_not_know_about_asteroids():
     assert process_query("asteroids") == "Unknown"
