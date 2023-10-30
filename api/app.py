@@ -35,7 +35,7 @@ def get_numbers(input_String):
 
 
 def process_query(query_param):
-    if "Which of the following numbers is the largest" in query_param:
+    if "largest" in query_param and "numbers" in query_param:
         return max(get_numbers(query_param[:-1]))
     elif "dinosaurs" in query_param:
         return "Dinosaurs ruled the Earth 200 million years ago"
