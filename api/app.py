@@ -1,3 +1,5 @@
+from datetime import datetime
+
 import requests
 from flask import Flask, render_template, request
 
@@ -5,13 +7,12 @@ app = Flask(__name__)
 
 
 @app.route("/")
-def hello_world():
+def homepage():
     return render_template("index.html")
-    # return "Hello I am alive!!"
 
 
 @app.route("/age_calculator", methods=["POST"])
-def submit():
+def age_calculator_page():
     curr_age = int(request.form.get("curr_age"))
     year_now = int(request.form.get("year_now"))
     target_year = int(request.form.get("target_year"))
@@ -23,8 +24,8 @@ def submit():
                            target_age=target_age)
 
 
-@app.route("/git_info", methods=["POST"])
-def render_git_page():
+@app.route("/git_lookup", methods=["POST"])
+def git_lookup():
     git_username = request.form.get("git_username")
 
     url = "https://api.github.com/users/{YOUR_GITHUB_USERNAME}/repos"
@@ -36,7 +37,15 @@ def render_git_page():
         google_github_search = ("https://www.google.com/search?q={"
                                 "author_name}+github")
 
+        stripped_repos = []
         for repo in repos:
+            stripped_repo_data = {}
+            stripped_repo_data["name"] = repo["name"]
+            date_time = datetime.strptime(repo["updated_at"], '%Y-%m-%dT%H:%M'
+                                                              ':%SZ')
+            stripped_repo_data["last_updated"] = date_time.strftime('%Y-%m-%d '
+                                                                    '%H:%M:%S')
+
             latest_commit_response = requests.get(
                 repo["commits_url"].replace("{/sha}", ""))
             latest_commit_info = {}
@@ -55,28 +64,29 @@ def render_git_page():
                     latest_commit_data["commit"]["message"]
 
             else:
-                latest_commit_info["hash"] = "404"
+                latest_commit_info["hash"] = ""
                 latest_commit_info["html_url"] = ""
                 latest_commit_info["author_url"] = ""
                 latest_commit_info["author"] = ""
                 latest_commit_info["commit_message"] = ""
 
-            repo["latest_commit"] = latest_commit_info
+            stripped_repo_data["latest_commit"] = latest_commit_info
+            stripped_repos.append(stripped_repo_data)
 
         return render_template("repositories.html",
                                git_user=git_username,
-                               repositories=repos)
+                               repositories=stripped_repos)
     else:
         return process_query(git_username)
 
 
 @app.route("/query", methods=["GET"])
-def get_query():
+def page_less_query():
     return process_query(request.args.get("q"))
 
 
-def get_numbers(input_String):
-    numbers = input_String.strip('?').split(':')[1].split(',')
+def get_numbers(input_string):
+    numbers = input_string.strip('?').split(':')[1].split(',')
     for i in range(len(numbers)):
         numbers[i] = int(numbers[i].strip())
     return numbers
@@ -92,7 +102,7 @@ def get_plus_query_ans(query_param):
     return sum(nums)
 
 
-def getSquareCubes(lst):
+def get_square_cubes(lst):
     for x in lst:
         cube = int(round(x ** (1. / 3))) ** 3 == x
         square = int(round(x ** (1. / 2))) ** 2 == x
@@ -119,7 +129,7 @@ def process_query(query_param):
     elif "multiplied" in query_param:
         return str(get_mul_query_ans(query_param))
     elif "square" in query_param and "cube" in query_param:
-        return str(getSquareCubes(get_numbers(query_param)))
+        return str(get_square_cubes(get_numbers(query_param)))
     elif "dinosaurs" in query_param:
         return "Dinosaurs ruled the Earth 200 million years ago"
     elif "asteroids" in query_param:
