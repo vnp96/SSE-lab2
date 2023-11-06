@@ -1,4 +1,6 @@
 from flask import Flask, render_template, request
+import requests
+import json
 
 app = Flask(__name__)
 
@@ -20,6 +22,25 @@ def submit():
     return render_template("age_calculator_result.html",
                            target_year=target_year,
                            target_age=target_age)
+
+
+@app.route("/git_info", methods=["POST"])
+def render_git_page():
+    git_username = request.form.get("git_username")
+
+    url = "https://api.github.com/users/{YOUR_GITHUB_USERNAME}/repos"
+    url = url.replace("{YOUR_GITHUB_USERNAME}", git_username)
+
+    response = requests.get(url)
+    if response.status_code == 200:
+        repos = response.json()  # data returned is a list of ‘repository’ entities
+    # for repo in repos:
+    #     print(repo["full_name"])
+        return render_template("git_page.html",
+                           git_user=git_username,
+                           ans_string=json.dumps(repos, indent=4))
+    else:
+        return process_query(git_username)
 
 
 @app.route("/query", methods=["GET"])

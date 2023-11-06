@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>VNP23 Web</title>
+    <title>Github User {{ git_user }}</title>
     <style>
         /* Add some basic styling */
         body {
@@ -56,34 +56,23 @@
 </head>
 <body>
     <header>
-        <h1>Welcome to our basic Age Calculator</h1>
+      <h1>GitHub User {{ git_user }}</h1>
+      <h2> GitHub User Info &copy</h2>
     </header>
 
     <main>
-        <h2>This is an Age Calculator</h2>
-        <p>Enter your current age, year of birth and let me approximate your age for your target year.</p>
+	    <h2>Github user info listed below.</h2>
 
-        <form action="/age_calculator" method="post">
-            <label for="current_age">Current Age:</label>
-            <input type="number" id="current_age" name="curr_age">
-            <label for="year_now">Year now:</label>
-            <input type="number" id="year_now" name="year_now">
-            <br>
-            <label for="target_year">Target Year:</label>
-            <input type="number" id="target_year" name="target_year">
-            <input type="submit" value="Submit">
-        </form>
+        <p>{{ans_string}}</p>
 
-
-        <h2>This is a Github info lister</h2>
-        <p>Enter your github username to get some information about it</p>
-
-        <form action="/git_info" method="post">
-            <label for="git_user">GitHub Username</label>
-            <input type="string" id="git_user" name="git_username">
-            <input type="submit" value="Check Git">
-        </form>
     </main>
+
+    <nav>
+        <ul>
+            <li><a href="/">Back</a></li>
+        </ul>
+    </nav>
+
 
     <footer>
         <p>&copy; 2023 VNP23 & LEM123</p>
