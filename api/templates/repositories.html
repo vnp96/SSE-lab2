@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GitHub Repositories</title>
+</head>
+<body>
+    <h1>GitHub Repositories for {{ username }}</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Repository Name</th>
+                <th>Last Updated</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for repo in repositories %}
+                <tr>
+                    <td>{{ repo.name }}</td>
+                    <td>{{ repo.updated_at }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
