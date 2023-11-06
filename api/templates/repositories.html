@@ -11,6 +11,10 @@
             padding: 0;
         }
 
+        table, th, td {
+            border: 1px solid black;
+        }
+
         header {
             background-color: #333;
             color: #fff;
@@ -73,8 +77,8 @@
     <tr>
         <td>{{ repo.name }}</td>
         <td>{{ repo.updated_at }}</td>
-        <td><a href = {{ repo.latest_commit.html_url }}>{{ repo.latest_commit.hash }}</a></td>
-        <td><a href = {{ repo.latest_commit.author_url }}>{{ repo.latest_commit.author }}</a></td>
+        <td><a href={{ repo.latest_commit.html_url }}>{{ repo.latest_commit.hash }}</a></td>
+        <td><a href={{ repo.latest_commit.author_url }}>{{ repo.latest_commit.author }}</a></td>
         <td>{{ repo.latest_commit.commit_message }}</td>
     </tr>
     {% endfor %}
