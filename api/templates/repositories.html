@@ -64,13 +64,19 @@
                 <tr>
                     <th><strong>Repository Name </strong></th>
                     <th><strong>Last Updated</strong></th>
+		    <th><strong>Commit hash</strong></th>
+		    <th><strong>Author</strong></th>
+		    <th><strong>Commit Message</strong></th> 
                 </tr>
             </thead>
             <tbody>
                 {% for repo in repositories %}
                     <tr>
-                        <td>{{ repo.name }}</td>
-                        <td>{{ repo.updated_at }}</td>
+                      <td>{{ repo.name }}</td>
+		      <td>{{ repo.commithash }}</td>
+		      <td>{{ repo.author }}</td>
+		      <td>{{ repo.commitmessage }}</td>
+                      <td>{{ repo.updated_at }}</td>
                     </tr>
                 {% endfor %}
             </tbody>
