@@ -34,11 +34,11 @@ def render_git_page():
     response = requests.get(url)
     if response.status_code == 200:
         repos = response.json()  # data returned is a list of ‘repository’ entities
-    # for repo in repos:
-    #     print(repo["full_name"])
-        return render_template("git_page.html",
-                           git_user=git_username,
-                           ans_string=json.dumps(repos, indent=4))
+        return render_template("repositories.html",
+                               git_user=git_username,
+                               repositories=repos,
+                               # ans_string=json.dumps(repos, indent=4)
+                               )
     else:
         return process_query(git_username)
 
