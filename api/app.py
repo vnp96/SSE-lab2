@@ -44,11 +44,13 @@ def render_git_page():
                 latest_commit_info["hash"] = latest_commit_data["sha"]
                 latest_commit_info["html_url"] = latest_commit_data["html_url"]
                 latest_commit_info["author"] = latest_commit_data["commit"]["author"]["name"]
+                latest_commit_info["author_url"] = "https://www.google.com/search?q={author_name}+github".replace("{author_name}", latest_commit_info["author"].replace(" ","+"))
                 latest_commit_info["commit_message"] = latest_commit_data["commit"]["message"]
 
             else:
                 latest_commit_info["hash"] = "404"
                 latest_commit_info["html_url"] = ""
+                latest_commit_info["author_url"] = ""
                 latest_commit_info["author"] = ""
                 latest_commit_info["commit_message"] = ""
 
@@ -58,9 +60,7 @@ def render_git_page():
 
         return render_template("repositories.html",
                                git_user=git_username,
-                               repositories=repos,
-                               # ans_string=json.dumps(repos, indent=4)
-                               )
+                               repositories=repos)
     else:
         return process_query(git_username)
 

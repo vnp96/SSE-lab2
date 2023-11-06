@@ -4,7 +4,6 @@
     <title>GitHub Repositories</title>
     <meta charset="UTF-8">
     <style>
-        /* Add some basic styling */
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
@@ -75,7 +74,7 @@
         <td>{{ repo.name }}</td>
         <td>{{ repo.updated_at }}</td>
         <td><a href = {{ repo.latest_commit.html_url }}>{{ repo.latest_commit.hash }}</a></td>
-        <td>{{ repo.latest_commit.author }}</td>
+        <td><a href = {{ repo.latest_commit.author_url }}>{{ repo.latest_commit.author }}</a></td>
         <td>{{ repo.latest_commit.commit_message }}</td>
     </tr>
     {% endfor %}
