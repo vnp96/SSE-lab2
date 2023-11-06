@@ -34,6 +34,28 @@ def render_git_page():
     response = requests.get(url)
     if response.status_code == 200:
         repos = response.json()  # data returned is a list of ‘repository’ entities
+
+        for repo in repos:
+            latest_commit_response = requests.get(repo["commits_url"].replace("{/sha}", ""))
+            latest_commit_info = {}
+            if latest_commit_response.status_code == 200:
+                latest_commit_data = latest_commit_response.json()[0]
+
+                latest_commit_info["hash"] = latest_commit_data["sha"]
+                latest_commit_info["html_url"] = latest_commit_data["html_url"]
+                latest_commit_info["author"] = latest_commit_data["commit"]["author"]["name"]
+                latest_commit_info["commit_message"] = latest_commit_data["commit"]["message"]
+
+            else:
+                latest_commit_info["hash"] = "404"
+                latest_commit_info["html_url"] = ""
+                latest_commit_info["author"] = ""
+                latest_commit_info["commit_message"] = ""
+
+            repo["latest_commit"] = latest_commit_info
+
+
+
         return render_template("repositories.html",
                                git_user=git_username,
                                repositories=repos,

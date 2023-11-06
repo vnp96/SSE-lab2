@@ -74,9 +74,9 @@
     <tr>
         <td>{{ repo.name }}</td>
         <td>{{ repo.updated_at }}</td>
-        <td>{{ repo.commithash }}</td>
-        <td>{{ repo.author }}</td>
-        <td>{{ repo.commitmessage }}</td>
+        <td><a href = {{ repo.latest_commit.html_url }}>{{ repo.latest_commit.hash }}</a></td>
+        <td>{{ repo.latest_commit.author }}</td>
+        <td>{{ repo.latest_commit.commit_message }}</td>
     </tr>
     {% endfor %}
     </tbody>
