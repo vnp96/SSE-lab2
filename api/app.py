@@ -8,7 +8,22 @@ app = Flask(__name__)
 
 @app.route("/")
 def homepage():
-    return render_template("index.html")
+    chuck_joke = ""
+    dad_joke = ""
+    chucky = requests.get("https://api.chucknorris.io/jokes/random")
+    if chucky.status_code == 200:
+        chuck_joke = chucky.json()["value"]
+
+    api_ninja_key = "82DDzW+fT044IK+VgjL1nw==uRsEaKdOUBT9WHSp"
+    dad_joke_response = requests.get("https://api.api-ninjas.com/v1/dadjokes"
+                                     "?limit={}".format(1),
+                                     headers={"X-Api-Key": api_ninja_key})
+    if dad_joke_response.status_code == 200:
+        dad_joke = dad_joke_response.json()[0]["joke"]
+
+    return render_template("index.html",
+                           chuck_joke=chuck_joke,
+                           dad_joke=dad_joke)
 
 
 @app.route("/age_calculator", methods=["POST"])
@@ -83,6 +98,11 @@ def git_lookup():
 @app.route("/query", methods=["GET"])
 def page_less_query():
     return process_query(request.args.get("q"))
+
+
+@app.route("/jokes", methods=["GET"])
+def jokes_page():
+    return "Insert jokes"
 
 
 def get_numbers(input_string):

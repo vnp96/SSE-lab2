@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>VNP23 Web</title>
+    <title>SSE WebPage</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/base_style.css') }}">
 </head>
 <body>
@@ -12,32 +12,54 @@
         <h2>VNP23 & LEM123</h2>
     </header>
 
-    <main>
-        <h2>Age Calculator</h2>
-        <p>Enter your current age, year of birth and let me approximate your age for your target year.</p>
+    <div class = "flex-container">
+        <div class = "flex-child">
+            <h2 id="centering">Age Calculator</h2>
+            <p>Enter your current age, year of birth and let me approximate your age for your target year.</p>
 
-        <form action="/age_calculator" method="post">
-            <label for="current_age">Current Age:</label>
-            <input type="number" id="current_age" name="curr_age">
-            <label for="year_now">Year now:</label>
-            <input type="number" id="year_now" name="year_now">
-            <br><br>
-            <label for="target_year">Target Year:</label>
-            <input type="number" id="target_year" name="target_year">
-            <input type="submit" value="Submit">
-        </form>
-    </main>
+            <form action="/age_calculator" method="post">
+                <label for="current_age">Current Age:</label>
+                <input type="number" id="current_age" name="curr_age">
+                <label for="year_now">Year now:</label>
+                <input type="number" id="year_now" name="year_now">
+                <br><br>
+                <label for="target_year">Target Year:</label>
+                <input type="number" id="target_year" name="target_year">
+                <input type="submit" value="Submit">
+            </form>
+        </div>
 
-    <main>
-        <h2>GitHub Lookup</h2>
-        <p>Enter a GitHub username below to look up their repositories.</p>
+        <div class = "flex-child">
+            <h2 id="centering">GitHub Lookup</h2>
+            <p>Enter a GitHub username below to look up their repositories.</p>
 
-        <form action="/git_lookup" method="post">
-            <label for="git_user">GitHub username</label>
-            <input type="text" id="git_user" name="git_username">
-            <input type="submit" value="Look Up">
-        </form>
-    </main>
+            <form action="/git_lookup" method="post">
+                <label for="git_user">GitHub username</label>
+                <input type="text" id="git_user" name="git_username">
+                <input type="submit" value="Look Up">
+            </form>
+        </div>
+    </div>
+
+
+    <div class = "flex-container">
+
+        <div class="flex-child" id="centering">
+            <a href="/">
+                <img src="https://images01.military.com/sites/default/files/styles/full/public/2021-04/chucknorris.jpeg.jpg" alt="Chucky" style="border: 2px solid #333;" class="image">
+            </a>
+            <p id="centering">{{ chuck_joke }}</p>
+        </div>
+
+
+        <div class="flex-child" id="centering">
+            <a href="/">
+                <img src="https://blog.kitchenstuffplus.com/wp-content/uploads/2019/06/Phil-Dunphy-from-Modern-Family.jpg" alt="PhillyD" style="border: 2px solid #333;" class="image">
+            </a>
+            <p id="centering">{{ dad_joke }}</p>
+        </div>
+
+    </div>
 
     <footer>
         <p>&copy; 2023 VNP23 & LEM123</p>

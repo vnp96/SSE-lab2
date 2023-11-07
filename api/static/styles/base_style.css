@@ -57,3 +57,33 @@ footer {
     border-top: 2px solid black;
     box-shadow: 0 50vh 0 50vh #333;
 }
+
+.flex-container {
+    display: flex;
+}
+
+.flex-child {
+    flex: 1;
+    border: 2px solid black;
+    /*max-width: 800px;*/
+    padding: 20px;
+    background-color: #dedede;
+    margin: 20px 10px;
+}
+
+.flex-child:first-child {
+    /*margin-right: 20px;*/
+    margin-left: 20px;
+}
+.flex-child:last-child {
+    margin-right: 20px;
+}
+
+#centering{
+    text-align: center;
+}
+
+.image{
+    max-width: 30vw;
+    height: auto;
+}
