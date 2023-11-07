@@ -55,5 +55,5 @@ footer {
     text-align: center;
     padding: 10px;
     border-top: 2px solid black;
-    border-bottom: 2px solid black;
+    box-shadow: 0 50vh 0 50vh #333;
 }
