@@ -1,3 +1,4 @@
+import os
 from datetime import datetime
 
 import requests
@@ -8,22 +9,30 @@ app = Flask(__name__)
 
 @app.route("/")
 def homepage():
+    return render_template("index.html",
+                           chuck_joke=chuck_api_get_joke(),
+                           dad_joke=dad_api_get_joke())
+
+
+def chuck_api_get_joke():
     chuck_joke = ""
-    dad_joke = ""
     chucky = requests.get("https://api.chucknorris.io/jokes/random")
     if chucky.status_code == 200:
         chuck_joke = chucky.json()["value"]
+    return chuck_joke
 
-    api_ninja_key = "82DDzW+fT044IK+VgjL1nw==uRsEaKdOUBT9WHSp"
+
+def dad_api_get_joke():
+    dad_joke = ""
+    api_ninja_key = os.environ.get("API_NINJA_KEY")
+
     dad_joke_response = requests.get("https://api.api-ninjas.com/v1/dadjokes"
                                      "?limit={}".format(1),
                                      headers={"X-Api-Key": api_ninja_key})
     if dad_joke_response.status_code == 200:
         dad_joke = dad_joke_response.json()[0]["joke"]
 
-    return render_template("index.html",
-                           chuck_joke=chuck_joke,
-                           dad_joke=dad_joke)
+    return dad_joke
 
 
 @app.route("/age_calculator", methods=["POST"])
@@ -54,8 +63,7 @@ def git_lookup():
 
         stripped_repos = []
         for repo in repos:
-            stripped_repo_data = {}
-            stripped_repo_data["name"] = repo["name"]
+            stripped_repo_data = {"name": repo["name"]}
             date_time = datetime.strptime(repo["updated_at"], '%Y-%m-%dT%H:%M'
                                                               ':%SZ')
             stripped_repo_data["last_updated"] = date_time.strftime('%Y-%m-%d '
