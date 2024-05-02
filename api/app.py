@@ -27,10 +27,12 @@ def dad_api_get_joke():
     api_ninja_key = os.environ.get("API_NINJA_KEY")
 
     dad_joke_response = requests.get("https://api.api-ninjas.com/v1/dadjokes"
-                                     "?limit={}".format(1),
+                                     ,
                                      headers={"X-Api-Key": api_ninja_key})
     if dad_joke_response.status_code == 200:
         dad_joke = dad_joke_response.json()[0]["joke"]
+    else:
+        print("Dad joke API response: " + str(dad_joke_response.json()))
 
     return dad_joke
 
