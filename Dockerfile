@@ -8,6 +8,6 @@ WORKDIR /usr/share/application
 RUN pip install -r requirements.txt
 
 WORKDIR /usr/share/application/api
-ENV API_NINJA_KEY=82DDzW+fT044IK+VgjL1nw==uRsEaKdOUBT9WHSp
+ENV API_NINJA_KEY $API_NINJA_KEY
 
 CMD ["flask", "run", "--host", "0.0.0.0"]
